@@ -23,6 +23,11 @@ const nextConfig = {
 
     return webpackConfig
   },
+  turbopack: {
+    resolveAlias: {
+      'drizzle-kit/api': './src/lib.ts',
+    },
+  },
 }
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })
