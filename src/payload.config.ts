@@ -38,10 +38,11 @@ const cloudflareLogger = {
   silent: () => {},
 } as any // Use PayloadLogger type when it's exported
 
-const cloudflare =
-  isCLI || !isProduction
-    ? await getCloudflareContextFromWrangler()
-    : await getCloudflareContext({ async: true })
+const cloudflare = await getCloudflareContextFromWrangler()
+// const cloudflare =
+//   isCLI || !isProduction
+//     ? await getCloudflareContextFromWrangler()
+//     : await getCloudflareContext({ async: true })
 
 export default buildConfig({
   admin: {
@@ -72,7 +73,8 @@ function getCloudflareContextFromWrangler(): Promise<CloudflareContext> {
     ({ getPlatformProxy }) =>
       getPlatformProxy({
         environment: process.env.CLOUDFLARE_ENV,
-        remoteBindings: isProduction,
+        // remoteBindings: isProduction,
+        remoteBindings: false,
       } satisfies GetPlatformProxyOptions),
   )
 }
